@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Neo3.Compiler.CSharp.Dev" Version="3.0.0-rc2" />
+    <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="MyNep11Token.cs">
+      <PackagePath>src</PackagePath>
+      <Pack>true</Pack>
+    </Compile>
+    <Compile Update="MyTokenContract.cs">
+      <PackagePath>src</PackagePath>
+      <Pack>true</Pack>
+    </Compile>
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="$(neon3) $(ProjectDir)" />
+  </Target>
+</Project>
