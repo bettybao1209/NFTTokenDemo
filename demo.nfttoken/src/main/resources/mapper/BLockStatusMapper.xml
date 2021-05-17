@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.nfttoken.mapper.ChainMapper">
+
+    <select id="selectBlockHeight" resultType="java.lang.Long">
+        select
+            block_index
+        from
+            block_status
+        order by id desc limit 1
+    </select>
+
+    <insert id="insertBlock" >
+        insert into
+        block_status(block_index)
+        values
+        (#{blockIndex})
+    </insert>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.nfttoken.mapper.TradeMapper">
+
+    <resultMap id="TokenTxMapper" type="com.example.demo.nfttoken.model.TokenTx">
+        <id column="id" property="id"/>
+        <result column="contract_hash" property="contractHash"/>
+        <result column="from_address" property="from"/>
+        <result column="to_address" property="to"/>
+        <result column="tx_hash" property="txHash"/>
+        <result column="block_time" property="timeStamp"/>
+    </resultMap>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into
+        nft_transfer(contract_hash, tokenId, from_address, to_address, amount, tx_hash, block_time)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+        ( #{item.contractHash}, #{item.tokenId}, #{item.from}, #{item.to}, #{item.amount}, #{item.txHash}, #{item.timeStamp} )
+        </foreach>
+    </insert>
+
+    <select id="selectTradeByAddress" resultMap="TokenTxMapper" parameterType="string">
+        select
+            from_address, to_address, tokenId, amount, tx_hash, block_time
+        from
+            nft_transfer
+        where
+            from_address = #{address} or to_address= #{address}
+    </select>
+
+    <select id="selectTradeByTokenId" resultMap="TokenTxMapper" parameterType="string">
+        select
+            from_address, to_address, tokenId, amount, tx_hash, block_time
+        from
+            nft_transfer
+        where
+            tokenId = #{tokenId}
+    </select>
+
+
+</mapper>
