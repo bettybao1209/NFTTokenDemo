@@ -20,9 +20,9 @@ namespace NFTToken
             StorageMap tokenMap = new(Storage.CurrentContext, Prefix_Token);
             TokenState token = (TokenState)StdLib.Deserialize(tokenMap[tokenId]);
             Map<string, object> map = base.Properties(tokenId);
-            map["description"] = token.Description;
+            map["desc"] = token.Description;
             map["name"] = token.Name;
-            map["tokenURI"] = token.tokenURI;
+            map["uri"] = token.tokenURI;
             map["owner"] = token.Owner;
             map["createdTime"] = token.CreatedTime;
             return map;

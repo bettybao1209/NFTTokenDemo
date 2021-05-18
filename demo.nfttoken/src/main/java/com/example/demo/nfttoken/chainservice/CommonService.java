@@ -1,7 +1,5 @@
 package com.example.demo.nfttoken.chainservice;
 
-import com.alibaba.fastjson.JSONArray;
-import com.example.demo.nfttoken.model.TokenState;
 import com.example.demo.nfttoken.model.TokenTx;
 import io.neow3j.contract.Hash160;
 import io.neow3j.contract.Hash256;
@@ -11,6 +9,7 @@ import io.neow3j.protocol.core.methods.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.management.Notification;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -43,12 +42,7 @@ public class CommonService {
     }
 
     public List<TokenTx> getTransferLogs(TokenTx transaction) throws IOException {
-        NeoGetApplicationLog logs = neow3j.getApplicationLog(new Hash256(transaction.getTxHash())).send();
-        List<NeoApplicationLog.Execution> executions = logs.getApplicationLog().getExecutions();
-        List<NeoApplicationLog.Execution.Notification> notifications = executions.stream().flatMap(execution -> execution.getNotifications().stream())
-                .filter(notification ->
-                        notification.getEventName().equalsIgnoreCase("transfer") && notification.getContract().equals(contract))
-                .collect(Collectors.toList());
+        List<NeoApplicationLog.Execution.Notification> notifications = getNotifications(transaction.getTxHash());
         List<TokenTx> tokenTxes = notifications.stream().map(notification -> {
             TokenTx tokenTx = new TokenTx();
             List<StackItem> state = (ArrayList<StackItem>)notification.getState().getValue();
@@ -62,5 +56,15 @@ public class CommonService {
             return tokenTx;
         }).collect(Collectors.toList());
         return tokenTxes;
+    }
+
+    private List<NeoApplicationLog.Execution.Notification> getNotifications(String txHash) throws IOException{
+        NeoGetApplicationLog logs = neow3j.getApplicationLog(new Hash256(txHash)).send();
+        List<NeoApplicationLog.Execution> executions = logs.getApplicationLog().getExecutions();
+        List<NeoApplicationLog.Execution.Notification> notifications = executions.stream().flatMap(execution -> execution.getNotifications().stream())
+                .filter(notification ->
+                        notification.getEventName().equalsIgnoreCase("transfer") && notification.getContract().equals(contract))
+                .collect(Collectors.toList());
+        return notifications;
     }
 }

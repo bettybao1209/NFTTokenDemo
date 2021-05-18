@@ -13,7 +13,7 @@ public class RpcConfig {
 
     @Bean
     public Hash160 contract(){
-        return new Hash160("0x85af59bb0271bd020994f2336185f4b45ed85908");
+        return new Hash160("0xaab216819d44016ffef72cc7c54515594e90679f");
     }
 
     @Bean

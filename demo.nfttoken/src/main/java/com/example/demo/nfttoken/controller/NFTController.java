@@ -21,7 +21,12 @@ public class NFTController {
     @PostMapping("/mint")
     public @ResponseBody String mintToken(@RequestBody TokenState tokenInfo){
         String txHash = contractService.testMint(tokenInfo);
-        System.out.println(txHash);
+        return txHash;
+    }
+
+    @PostMapping("/batchMint")
+    public @ResponseBody String batchMint(@RequestBody TokenState tokenInfo, @RequestParam long amount){
+        String txHash = contractService.testBatchMint(tokenInfo, amount);
         return txHash;
     }
 
@@ -44,5 +49,15 @@ public class NFTController {
     @GetMapping("/tx/tokenId")
     public List<TokenTx> selectTradeByTokenId(@RequestParam String tokenId){
         return tradeService.selectTradeByTokenId(tokenId);
+    }
+
+    @GetMapping("/tokensof")
+    public List<String> tokensOf(@RequestParam String owner){
+        return contractService.testTokensOf(owner);
+    }
+
+    @GetMapping("/tokens")
+    public List<String> tokens(){
+        return contractService.testTokens();
     }
 }

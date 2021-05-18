@@ -2,11 +2,20 @@ package com.example.demo.nfttoken.model;
 
 public class TokenState {
 
+    private String tokenId;
     private String name;
     private String uri;
     private String desc;
     private String owner;
     private long createdTime;
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
+    }
 
     public String getOwner() {
         return owner;
