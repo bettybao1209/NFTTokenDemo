@@ -8,7 +8,6 @@ CREATE TABLE `nft_transfer` (
    `tx_hash` varchar(64) NOT NULL,
    `block_time` bigint DEFAULT NULL,
    PRIMARY KEY (`id`),
-   UNIQUE KEY `tokenId_UNIQUE` (`tokenId`),
    KEY `from_index` (`from_address`),
    KEY `to_index` (`to_address`),
    KEY `tokenId_index` (`tokenId`)

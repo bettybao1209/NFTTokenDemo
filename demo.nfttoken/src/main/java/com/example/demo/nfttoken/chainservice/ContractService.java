@@ -2,19 +2,17 @@ package com.example.demo.nfttoken.chainservice;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.nfttoken.model.TokenState;
-import io.neow3j.contract.ContractParameter;
-import io.neow3j.contract.Hash160;
 import io.neow3j.contract.SmartContract;
 import io.neow3j.crypto.Base64;
 import io.neow3j.protocol.Neow3j;
-import io.neow3j.protocol.core.methods.response.ByteStringStackItem;
-import io.neow3j.protocol.core.methods.response.NeoInvokeFunction;
-import io.neow3j.protocol.core.methods.response.NeoSendRawTransaction;
-import io.neow3j.protocol.core.methods.response.StackItem;
+import io.neow3j.protocol.core.response.NeoInvokeFunction;
+import io.neow3j.protocol.core.response.NeoSendRawTransaction;
+import io.neow3j.protocol.core.stackitem.StackItem;
 import io.neow3j.transaction.Signer;
+import io.neow3j.types.ContractParameter;
+import io.neow3j.types.Hash160;
 import io.neow3j.wallet.Account;
 import io.neow3j.wallet.Wallet;
-import okio.ByteString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -55,10 +53,6 @@ public class ContractService {
 
         String txHash = "";
         try {
-            NeoInvokeFunction testResponse = new SmartContract(contract, neow3j)
-                    .callInvokeFunction("mintInBatch", Arrays.asList(data, amountData), Signer.calledByEntry(account.getScriptHash()));
-            String systemFee = testResponse.getResult().getGasConsumed();
-
             NeoSendRawTransaction response = new SmartContract(contract, neow3j)
                     .invokeFunction("mintInBatch", data, amountData)
                     .wallet(wallet)

@@ -1,8 +1,8 @@
 package com.example.demo.nfttoken.config;
 
-import io.neow3j.contract.Hash160;
 import io.neow3j.protocol.Neow3j;
 import io.neow3j.protocol.http.HttpService;
+import io.neow3j.types.Hash160;
 import io.neow3j.wallet.Account;
 import io.neow3j.wallet.Wallet;
 import org.springframework.context.annotation.Bean;

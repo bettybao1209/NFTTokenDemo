@@ -1,15 +1,18 @@
 package com.example.demo.nfttoken.chainservice;
 
 import com.example.demo.nfttoken.model.TokenTx;
-import io.neow3j.contract.Hash160;
-import io.neow3j.contract.Hash256;
 import io.neow3j.crypto.Base64;
 import io.neow3j.protocol.Neow3j;
-import io.neow3j.protocol.core.methods.response.*;
+import io.neow3j.protocol.core.response.NeoApplicationLog;
+import io.neow3j.protocol.core.response.NeoBlockCount;
+import io.neow3j.protocol.core.response.NeoGetApplicationLog;
+import io.neow3j.protocol.core.response.NeoGetBlock;
+import io.neow3j.protocol.core.stackitem.StackItem;
+import io.neow3j.types.Hash160;
+import io.neow3j.types.Hash256;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.management.Notification;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ public class CommonService {
 
     public BigInteger getRemoteBlockIndex() throws IOException {
         NeoBlockCount blockCount = neow3j.getBlockCount().send();
-        BigInteger blockIndex = blockCount.getBlockIndex().subtract(BigInteger.valueOf(1));
+        BigInteger blockIndex = blockCount.getBlockCount().subtract(BigInteger.valueOf(1));
         return blockIndex;
     }
 
