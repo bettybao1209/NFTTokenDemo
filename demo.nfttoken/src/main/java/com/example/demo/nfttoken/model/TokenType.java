@@ -16,5 +16,4 @@ public enum TokenType{
         this.code = code;
         this.desc = desc;
     }
-
 }

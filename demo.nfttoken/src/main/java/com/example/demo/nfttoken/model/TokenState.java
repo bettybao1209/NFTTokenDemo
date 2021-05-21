@@ -1,5 +1,8 @@
 package com.example.demo.nfttoken.model;
 
+import lombok.Data;
+
+@Data
 public class TokenState {
 
     private String tokenId;
@@ -12,77 +15,4 @@ public class TokenState {
     private TokenType type;
 
     private long createdTime;
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
-    public TokenType getType() {
-        return type;
-    }
-
-    public void setType(TokenType type) {
-        this.type = type;
-    }
-
-    public String getTokenId() {
-        return tokenId;
-    }
-
-    public void setTokenId(String tokenId) {
-        this.tokenId = tokenId;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public long getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(long createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "name='" + name + '\'' +
-                ", uri='" + uri + '\'' +
-                ", desc='" + desc + '\'' +
-                '}';
-    }
 }
