@@ -1,4 +1,4 @@
-﻿using Neo;
+using Neo;
 using Neo.SmartContract.Framework;
 
 namespace NFTToken
@@ -9,5 +9,7 @@ namespace NFTToken
         public string tokenURI;
         public UInt256 TxHash;
         public ulong CreatedTime;
+        public string Type;
+        public UInt160 Creator;
     }
 }

@@ -2,8 +2,8 @@ package com.example.demo.nfttoken.task;
 
 import com.example.demo.nfttoken.chainservice.CommonService;
 import com.example.demo.nfttoken.model.TokenTx;
-import com.example.demo.nfttoken.service.ChainService;
-import com.example.demo.nfttoken.service.TradeService;
+import com.example.demo.nfttoken.dataservice.ChainService;
+import com.example.demo.nfttoken.dataservice.TradeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

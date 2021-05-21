@@ -29,6 +29,11 @@ public class ContractService {
     @Autowired private Account account;
     @Autowired private CommonService commonService;
 
+    public Account createWallet(){
+        Wallet wallet = Wallet.create();
+        return wallet.getAccounts().get(0);
+    }
+
     public String testMint(TokenState tokenInfo) {
         ContractParameter data = ContractParameter.string(JSONObject.toJSONString(tokenInfo));
 
@@ -77,7 +82,7 @@ public class ContractService {
                 Map<String, String> stackToStrMap = new HashMap<>();
                 for(Map.Entry<StackItem, StackItem> entry: stackItems.entrySet()){
                     String key = entry.getKey().getString();
-                    if(key.equalsIgnoreCase("owner")){
+                    if(key.equalsIgnoreCase("owner") || key.equalsIgnoreCase("creator")){
                         stackToStrMap.put(key, entry.getValue().getAddress());
                     }else{
                         stackToStrMap.put(key, entry.getValue().getString());

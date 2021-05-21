@@ -24,6 +24,8 @@ namespace NFTToken
             map["name"] = token.Name;
             map["uri"] = token.tokenURI;
             map["owner"] = token.Owner;
+            map["creator"] = token.Creator;
+            map["type"] = token.Type;
             map["createdTime"] = token.CreatedTime;
             return map;
         }
@@ -37,6 +39,8 @@ namespace NFTToken
             {
                 Name = customData["name"],
                 Owner = tx.Sender,
+                Creator = tx.Sender,
+                Type = customData["type"],
                 tokenURI = customData["uri"],
                 Description = customData["desc"],
                 CreatedTime = Runtime.Time

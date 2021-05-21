@@ -7,7 +7,27 @@ public class TokenState {
     private String uri;
     private String desc;
     private String owner;
+
+    private String creator;
+    private TokenType type;
+
     private long createdTime;
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public TokenType getType() {
+        return type;
+    }
+
+    public void setType(TokenType type) {
+        this.type = type;
+    }
 
     public String getTokenId() {
         return tokenId;

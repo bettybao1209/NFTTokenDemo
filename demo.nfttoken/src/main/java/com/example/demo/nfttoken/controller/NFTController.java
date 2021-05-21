@@ -3,7 +3,8 @@ package com.example.demo.nfttoken.controller;
 import com.example.demo.nfttoken.model.TokenState;
 import com.example.demo.nfttoken.chainservice.ContractService;
 import com.example.demo.nfttoken.model.TokenTx;
-import com.example.demo.nfttoken.service.TradeService;
+import com.example.demo.nfttoken.dataservice.TradeService;
+import io.neow3j.wallet.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,14 +19,20 @@ public class NFTController {
     @Autowired
     TradeService tradeService;
 
+    @PostMapping("/wallet")
+    public Account createWallet(){
+        Account account = contractService.createWallet();
+        return account;
+    }
+
     @PostMapping("/mint")
-    public @ResponseBody String mintToken(@RequestBody TokenState tokenInfo){
+    public String mintToken(@RequestBody TokenState tokenInfo){
         String txHash = contractService.testMint(tokenInfo);
         return txHash;
     }
 
     @PostMapping("/batchMint")
-    public @ResponseBody String batchMint(@RequestBody TokenState tokenInfo, @RequestParam long amount){
+    public String batchMint(@RequestBody TokenState tokenInfo, @RequestParam long amount){
         String txHash = contractService.testBatchMint(tokenInfo, amount);
         return txHash;
     }
