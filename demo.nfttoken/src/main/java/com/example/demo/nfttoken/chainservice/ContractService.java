@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.demo.nfttoken.model.TokenState;
 import io.neow3j.contract.SmartContract;
 import io.neow3j.crypto.Base64;
+import io.neow3j.crypto.exceptions.CipherException;
 import io.neow3j.protocol.Neow3j;
 import io.neow3j.protocol.core.response.NeoInvokeFunction;
 import io.neow3j.protocol.core.response.NeoSendRawTransaction;
@@ -13,6 +14,8 @@ import io.neow3j.types.ContractParameter;
 import io.neow3j.types.Hash160;
 import io.neow3j.wallet.Account;
 import io.neow3j.wallet.Wallet;
+import io.neow3j.wallet.nep6.NEP6Account;
+import io.neow3j.wallet.nep6.NEP6Wallet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +32,13 @@ public class ContractService {
     @Autowired private Account account;
     @Autowired private CommonService commonService;
 
-    public Account createWallet(){
-        Wallet wallet = Wallet.create();
+    public NEP6Account createWallet(String password) {
+        NEP6Wallet wallet = null;
+        try {
+            wallet = Wallet.create(password).toNEP6Wallet();
+        } catch (CipherException e) {
+            e.printStackTrace();
+        }
         return wallet.getAccounts().get(0);
     }
 

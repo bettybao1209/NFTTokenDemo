@@ -5,6 +5,7 @@ import com.example.demo.nfttoken.chainservice.ContractService;
 import com.example.demo.nfttoken.model.TokenTx;
 import com.example.demo.nfttoken.dataservice.TradeService;
 import io.neow3j.wallet.Account;
+import io.neow3j.wallet.nep6.NEP6Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +21,8 @@ public class NFTController {
     TradeService tradeService;
 
     @PostMapping("/wallet")
-    public Account createWallet(){
-        Account account = contractService.createWallet();
-        return account;
+    public NEP6Account createWallet(@RequestParam String password){
+        return contractService.createWallet(password);
     }
 
     @PostMapping("/mint")
