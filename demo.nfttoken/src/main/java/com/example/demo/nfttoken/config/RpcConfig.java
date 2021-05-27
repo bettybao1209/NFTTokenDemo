@@ -23,7 +23,7 @@ public class RpcConfig {
 
     @Bean
     public Account account(){
-        return Account.fromWIF("L3gepiWZPJts7ZjcMwXVWpuPrJLsR21azWpfCgBihE8Lu9f3t2LZ");
+        return Account.fromWIF("L4eXZr8gbVC52cxw24X8s1ohYdqG2AZh3UFqjATEKpsEFR44JpHx");
     }
 
     @Bean

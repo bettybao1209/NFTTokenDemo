@@ -62,12 +62,15 @@ public class CommonService {
     }
 
     private List<NeoApplicationLog.Execution.Notification> getNotifications(String txHash) throws IOException{
-        NeoGetApplicationLog logs = neow3j.getApplicationLog(new Hash256(txHash)).send();
-        List<NeoApplicationLog.Execution> executions = logs.getApplicationLog().getExecutions();
-        List<NeoApplicationLog.Execution.Notification> notifications = executions.stream().flatMap(execution -> execution.getNotifications().stream())
+        NeoApplicationLog logs = neow3j.getApplicationLog(new Hash256(txHash)).send().getApplicationLog();
+        List<NeoApplicationLog.Execution.Notification> notifications = new ArrayList<>();
+        if(logs != null){
+            List<NeoApplicationLog.Execution> executions = logs.getExecutions();
+            notifications = executions.stream().flatMap(execution -> execution.getNotifications().stream())
                 .filter(notification ->
                         notification.getEventName().equalsIgnoreCase("transfer") && notification.getContract().equals(contract))
                 .collect(Collectors.toList());
+        }
         return notifications;
     }
 }
